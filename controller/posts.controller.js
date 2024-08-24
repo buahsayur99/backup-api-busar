@@ -1,4 +1,5 @@
-const pool = require("../database/index")
+const pool = require("../database/index");
+
 const postsController = {
     getAll: async (req, res) => {
         try {
@@ -57,7 +58,7 @@ const postsController = {
                 status: "error"
             })
         }
-    }, 
+    },
     delete: async (req, res) => {
         try {
             const { id } = req.params
