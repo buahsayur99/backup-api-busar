@@ -78,4 +78,4 @@ const postsController = {
 
 }
 
-module.exports = postsController
+export default { postsController }
