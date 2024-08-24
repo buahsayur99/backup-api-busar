@@ -1,4 +1,6 @@
-const pool = require("../database/index");
+// const pool = require("../database/index");
+
+import pool from "../database/index.js";
 
 const postsController = {
     getAll: async (req, res) => {

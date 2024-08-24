@@ -1,14 +1,18 @@
-const pool = require("../database/index")
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+// const pool = require("../database/index");
+// const bcrypt = require('bcrypt');
+// const jwt = require('jsonwebtoken');
+
+import pool from "../database/index.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const authController = {
     register: async (req, res) => {
         try {
             const { email, password, name } = req.body
-            const [user, ] = await pool.query("select * from users where email = ?", [email])
+            const [user,] = await pool.query("select * from users where email = ?", [email])
             if (user[0]) return res.json({ error: "Email already exists!" })
-            
+
 
             const hash = await bcrypt.hash(password, 10)
 
@@ -20,7 +24,7 @@ const authController = {
             } else {
                 return res.json({ error: "Error" })
             }
-            
+
         } catch (error) {
             console.log(error)
             res.json({
@@ -31,28 +35,28 @@ const authController = {
     login: async (req, res) => {
         try {
             const { email, password } = req.body
-            const [user, ] = await pool.query("select * from users where email = ?", [email])
+            const [user,] = await pool.query("select * from users where email = ?", [email])
             if (!user[0]) return res.json({ error: "Invalid email!" })
-            
+
             const { password: hash, id, name } = user[0]
 
             const check = await bcrypt.compare(password, hash)
 
             if (check) {
                 const accessToken = jwt.sign({ userId: id }, '3812932sjad34&*@', { expiresIn: '1h' });
-                return res.json({ 
+                return res.json({
                     accessToken,
-                    data: { 
+                    data: {
                         userId: id,
                         name,
                         email
                     }
-                 })
+                })
 
             }
 
             return res.json({ error: "Wrong password!" })
-            
+
         } catch (error) {
             console.log(error)
             res.json({
