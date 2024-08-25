@@ -95,8 +95,6 @@ const Post = db.define('posts', {
 
 export const getAllPosts = async (req, res) => {
     try {
-        // const [rows, fields] = await pool.query("select * from posts");
-        // res.json({ data: rows });
         const data = await Post.findAll();
         res.status(200).json(data);
     } catch (error) {
@@ -105,14 +103,16 @@ export const getAllPosts = async (req, res) => {
     }
 };
 
-// export const createPost = async (req, res) => {
-//     try {
-//         const { title, content } = req.body;
-//         const sql = "insert into posts (title, content) values (?, ?)";
-//         const [rows, fields] = await pool.query(sql, [title, content]);
-//         res.json({ data: rows });
-//     } catch (error) {
-//         console.log(error);
-//         res.json({ status: "error" });
-//     }
-// };
+export const createPost = async (req, res) => {
+    try {
+        const { title, content } = req.body;
+        await Post.create({
+            title: title,
+            content: content
+        });
+        res.status(200).json({ message: "create success" })
+    } catch (error) {
+        console.log(error);
+        res.json({ status: "error" });
+    }
+};
