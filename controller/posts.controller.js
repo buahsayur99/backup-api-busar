@@ -87,3 +87,15 @@ export const getAllPosts = async (req, res) => {
         res.json({ status: "error" });
     }
 };
+
+export const createPost = async (req, res) => {
+    try {
+        const { title, content } = req.body;
+        const sql = "insert into posts (title, content) values (?, ?)";
+        const [rows, fields] = await pool.query(sql, [title, content]);
+        res.json({ data: rows });
+    } catch (error) {
+        console.log(error);
+        res.json({ status: "error" });
+    }
+};
