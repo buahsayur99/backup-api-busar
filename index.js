@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import postsRouter from "./routes/posts.router.js";
+import postsRouter from "./src/routes/posts.router.js";
 
 
 const app = express();
