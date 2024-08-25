@@ -1,5 +1,6 @@
 // const pool = require("../database/index");
 
+import { DataTypes } from "sequelize";
 import db from "../database/index.js";
 
 // const postsController = {
@@ -78,11 +79,25 @@ import db from "../database/index.js";
 
 // }
 
+const Post = db.define('posts', {
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    content: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    }
+}, {
+    tableName: 'posts', // Sesuaikan dengan nama tabel di database
+    timestamps: false // Nonaktifkan timestamps
+});
+
 export const getAllPosts = async (req, res) => {
     try {
         // const [rows, fields] = await pool.query("select * from posts");
         // res.json({ data: rows });
-        const data = await db.findAll();
+        const data = await Post.findAll();
         res.status(200).json(data);
     } catch (error) {
         console.log(error);
