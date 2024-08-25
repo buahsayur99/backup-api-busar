@@ -15,10 +15,10 @@ app.use(express.json())
 // const postsRouter = require('./routes/posts.router')
 // const authRouter = require('./routes/auth.router')
 import postsRouter from "./routes/posts.router.js";
-import authRouter from "./routes/auth.router.js";
+// import authRouter from "./routes/auth.router.js";
 
 app.use("/api/v1/posts", postsRouter)
-app.use("/api/v1/auth", authRouter)
+// app.use("/api/v1/auth", authRouter)
 
 const PORT = process.env.PORT || 5000
 

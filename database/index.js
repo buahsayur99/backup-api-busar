@@ -1,5 +1,7 @@
 // const mysql = require('mysql2')
 import mysql from "mysql2";
+import dotenv from "dotenv";
+dotenv.config();
 
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
@@ -16,4 +18,4 @@ pool.getConnection((err, conn) => {
     console.log("Connected successfully")
 })
 
-module.exports = pool.promise()
+export default pool.promise();

@@ -3,15 +3,18 @@
 
 // const postsController = require("../controller/posts.controller")
 
-import express from "express";
+import express from 'express';
+// import postsController from '../controller/posts.controller.js';
+import { getAllPosts } from "../controller/posts.controller.js";
+
 const router = express.Router();
 
-import postsController from "../controller/posts.controller.js";
+// router.get("/", postsController.getAll);
+// router.get("/:id", postsController.getById);
+// router.post("/", postsController.create);
+// router.put("/:id", postsController.update);
+// router.delete("/:id", postsController.delete);
 
-router.get("/", postsController.getAll)
-router.get("/:id", postsController.getById)
-router.post("/", postsController.create)
-router.put("/:id", postsController.update)
-router.delete("/:id", postsController.delete)
+router.get("/", getAllPosts);
 
-module.exports = router
+export default router;
