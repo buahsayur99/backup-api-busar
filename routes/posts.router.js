@@ -5,7 +5,7 @@
 
 import express from 'express';
 // import postsController from '../controller/posts.controller.js';
-import { getAllPosts, createPost } from "../controller/posts.controller.js";
+import { getAllPosts } from "../controller/posts.controller.js";
 
 const router = express.Router();
 
@@ -16,6 +16,6 @@ const router = express.Router();
 // router.delete("/:id", postsController.delete);
 
 router.get("/", getAllPosts);
-router.post("/", createPost);
+// router.post("/", createPost);
 
 export default router;

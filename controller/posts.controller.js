@@ -1,6 +1,6 @@
 // const pool = require("../database/index");
 
-import pool from "../database/index.js";
+import db from "../database/index.js";
 
 // const postsController = {
 //     getAll: async (req, res) => {
@@ -80,22 +80,24 @@ import pool from "../database/index.js";
 
 export const getAllPosts = async (req, res) => {
     try {
-        const [rows, fields] = await pool.query("select * from posts");
-        res.json({ data: rows });
+        // const [rows, fields] = await pool.query("select * from posts");
+        // res.json({ data: rows });
+        const data = await db.findAll();
+        res.status(200).json(data);
     } catch (error) {
         console.log(error);
         res.json({ status: "error" });
     }
 };
 
-export const createPost = async (req, res) => {
-    try {
-        const { title, content } = req.body;
-        const sql = "insert into posts (title, content) values (?, ?)";
-        const [rows, fields] = await pool.query(sql, [title, content]);
-        res.json({ data: rows });
-    } catch (error) {
-        console.log(error);
-        res.json({ status: "error" });
-    }
-};
+// export const createPost = async (req, res) => {
+//     try {
+//         const { title, content } = req.body;
+//         const sql = "insert into posts (title, content) values (?, ?)";
+//         const [rows, fields] = await pool.query(sql, [title, content]);
+//         res.json({ data: rows });
+//     } catch (error) {
+//         console.log(error);
+//         res.json({ status: "error" });
+//     }
+// };
