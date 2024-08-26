@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import database from "./src/database/index.js";
 // Import Router
-import { AuthRouter, UsersRouter } from "./src/routes/index.js";
+import { AuthRouter, UsersRouter, CategoryRouter } from "./src/routes/index.js";
 
 
 const app = express();
@@ -20,6 +20,7 @@ app.use(express.json());
 // Router
 app.use(UsersRouter);
 app.use(AuthRouter);
+app.use(CategoryRouter);
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
