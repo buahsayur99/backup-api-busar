@@ -1,7 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
-import postsRouter from "./src/routes/posts.router.js";
 import database from "./src/database/index.js";
+// Import Router
+import postsRouter from "./src/routes/posts.router.js";
+import UsersRouter from "./src/routes/UsersRouter.js";
 
 
 const app = express();
@@ -19,7 +21,8 @@ app.use(express.json())
 
 // import authRouter from "./routes/auth.router.js";
 
-app.use("/api/v1/posts", postsRouter)
+app.use("/api/v1/posts", postsRouter);
+app.use(UsersRouter);
 // app.use("/api/v1/auth", authRouter)
 
 const PORT = process.env.PORT || 5000

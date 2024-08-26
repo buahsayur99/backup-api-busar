@@ -3,23 +3,6 @@ import dotenv from "dotenv";
 import { Sequelize } from "sequelize";
 dotenv.config();
 
-// const pool = mysql.createPool({
-//     host: process.env.DB_HOST,
-//     user: process.env.DB_USERNAME,
-//     password: process.env.DB_PASSWORD,
-//     database: process.env.DB_DBNAME,
-//     waitForConnections: true,
-//     connectionLimit: 10,
-//     queueLimit: 0
-// });
-
-// pool.getConnection((err, conn) => {
-//     if (err) console.log(err)
-//     console.log("Connected successfully")
-// })
-
-// export default pool.promise();
-
 const db = new Sequelize(process.env.DB_DBNAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
     host: process.env.DB_HOST,
     dialect: 'mysql',
