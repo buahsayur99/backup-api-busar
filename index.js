@@ -1,10 +1,18 @@
 import express from "express";
 import dotenv from "dotenv";
 import postsRouter from "./src/routes/posts.router.js";
+import database from "./src/database/index.js";
 
 
 const app = express();
 dotenv.config();
+
+try {
+    await database.sync()
+    console.log("Database Connected...");
+} catch (error) {
+    console.error(error);
+}
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
