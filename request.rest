@@ -53,11 +53,11 @@ Content-Type: application/json
 
 ###
 // Get User Me
-GET http://localhost:5000/me/758bd862-a7f7-4f4d-8798-9c4e146dacce
+GET http://localhost:5000/me/6e2db6fc-293b-4d25-9f31-729f59f678c4
 
 ###
 // Get User By Uuid
-GET http://localhost:5000/get/users/758bd862-a7f7-4f4d-8798-9c4e146dacce
+GET http://localhost:5000/get/users/6e2db6fc-293b-4d25-9f31-729f59f678c4
 
 ###
 // Create Address

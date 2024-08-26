@@ -13,10 +13,10 @@ import {
 const router = express.Router();
 
 router.get("/users/all/:email", getAllUsers);
-router.post("/users", createUsers);
 router.get("/users/:email", getUsersByEmail);
-router.patch("/users/:id", updateUsers);
+router.post("/users", createUsers);
 router.delete("/users/:id", deleteUsers);
+router.patch("/users/:id", updateUsers);
 router.patch("/users/email/:uuid", changeEmailUsers);
 router.patch("/users/address/:uuid", updateIdAddress);
 
