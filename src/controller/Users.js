@@ -1,5 +1,5 @@
 import Users from "../models/UserModel.js"
-// import argon2 from "argon2";
+import argon2 from "argon2";
 
 export const getUsers = async (req, res) => {
     const { email } = req.body
@@ -7,8 +7,8 @@ export const getUsers = async (req, res) => {
         const response = await Users.findAll({
             attributes: ["id", "email", "idAddress", "role"]
         });
-        if (response.email !== email)
-            res.status(200).json(response)
+        // if (response.email !== email) return res.status()
+        res.status(200).json(response)
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
@@ -31,33 +31,33 @@ export const getUsers = async (req, res) => {
 //     }
 // }
 
-// export const createUsers = async (req, res) => {
-//     const { email, password, confirmasiPassword, role, idAddress } = req.body
+export const createUsers = async (req, res) => {
+    const { email, password, confirmasiPassword, role, idAddress } = req.body
 
-//     // fetch data from database based on email
-//     const user = await Users.findOne({
-//         where: {
-//             email: email
-//         }
-//     })
-//     // if if there are user return 404
-//     if (user) return res.status(404).json({ message: "email yang anda gunakan sudah terdaftar" })
-//     // if the password and confirmasi password not is the same
-//     if (password !== confirmasiPassword) return res.status(401).json({ message: "password dan confirmasi password tidak sama" });
-//     const hashPassword = await argon2.hash(password);
+    // fetch data from database based on email
+    const user = await Users.findOne({
+        where: {
+            email: email
+        }
+    })
+    // if if there are user return 404
+    if (user) return res.status(404).json({ message: "email yang anda gunakan sudah terdaftar" })
+    // if the password and confirmasi password not is the same
+    if (password !== confirmasiPassword) return res.status(401).json({ message: "password dan confirmasi password tidak sama" });
+    const hashPassword = await argon2.hash(password);
 
-//     try {
-//         await Users.create({
-//             email: email,
-//             password: hashPassword,
-//             role: role,
-//             idAddress: idAddress
-//         });
-//         res.status(201).json({ message: "register success" })
-//     } catch (error) {
-//         res.status(400).json({ message: error.message });
-//     }
-// }
+    try {
+        await Users.create({
+            email: email,
+            password: hashPassword,
+            role: role,
+            idAddress: idAddress
+        });
+        res.status(201).json({ message: "register success" })
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
 
 // export const updateUsers = async (req, res) => {
 //     // Query Users By Params Id
