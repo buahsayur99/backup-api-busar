@@ -3,28 +3,28 @@ POST http://localhost:5000/users
 Content-Type: application/json
 
 {
-    "email": "paat@gmail.com",
+    "email": "paatlupi@gmail.com",
     "password": "123456",
     "confirmasiPassword": "123456",
-    "role": "admin"
+    "role": "users"
 }
 
 ###
-// Get User By Email
-GET http://localhost:5000/users/paatlupi@gmail.com
+// Get All User By Email
+GET http://localhost:5000/users/all/admin@gmail.com
 
 ###
-// Get User
-GET http://localhost:5000/users
+// Get User UUID By Email
+GET http://localhost:5000/users/admin@gmail.com
 
 ###
 // Update User By Id
-PATCH http://localhost:5000/users/18b1438f-77a7-47f5-b5d7-c29692e36e9a
+PATCH http://localhost:5000/users/329854bb-ec15-46a7-b597-f2566425be9d
 Content-Type: application/json
 
 {
-    "password": "123456",
-    "confirmasiPassword": "123456"
+    "password": "123",
+    "confirmasiPassword": "123"
 }
 
 ###
@@ -38,7 +38,7 @@ Content-Type: application/json
 
 ###
 // Delete Users By Id
-DELETE http://localhost:5000/users/f1b51f33-cc29-476c-996f-e2b2bb457a8c
+DELETE http://localhost:5000/users/329854bb-ec15-46a7-b597-f2566425be9d
 Content-Type: application/json
 
 ###
