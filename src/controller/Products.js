@@ -26,14 +26,6 @@ export const uploadProduct = async (req, res) => {
     try {
         const { name, amount, price, category, information } = req.body;
 
-        const product = await Products.findOne({
-            where: {
-                name: name
-            }
-        });
-
-        if (product) return res.status(409).json({ message: "product sudah terdaftar" })
-
         const imagesJSON = JSON.stringify(req.newImages);
         const urlJSON = JSON.stringify(req.newUrl);
 

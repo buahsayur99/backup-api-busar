@@ -55,6 +55,13 @@ const handleFileUploadSizeLimit = (err, req, res, next) => {
 // Middleware untuk memeriksa apakah ada file yang diunggah
 const checkUploadText = async (req, res, next) => {
     const { name, amount, price, category, information } = req.body;
+    const product = await Products.findOne({
+        where: {
+            name: name
+        }
+    });
+    if (product) return res.status(409).json({ message: "product sudah terdaftar" });
+
     // Pastikan 'image1' atau 'image2' ada dalam request files
     if (name === "" || !name) return res.status(400).json({ message: "name tidak boleh kosong." });
     if (amount === "" || !amount) return res.status(400).json({ message: "amount tidak boleh kosong." });
