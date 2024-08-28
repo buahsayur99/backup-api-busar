@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import database from "./src/database/index.js";
 // Import Router
-import { AuthRouter, UsersRouter, CategoryRouter, ProductRouter } from "./src/routes/index.js";
+import { AuthRouter, UsersRouter, CategoryRouter, ProductRouter, AddressRouter, LabelAddressRouter } from "./src/routes/index.js";
 
 
 const app = express();
@@ -23,6 +23,8 @@ app.use(UsersRouter);
 app.use(AuthRouter);
 app.use(CategoryRouter);
 app.use(ProductRouter);
+app.use(AddressRouter);
+app.use(LabelAddressRouter);
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
