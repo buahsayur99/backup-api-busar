@@ -1,10 +1,12 @@
 import express from "express";
+import path from "path";
 import dotenv from "dotenv";
 import http from "http";
 import { io } from "./src/sockets/ConfigureSocket.js";
 import database from "./src/database/index.js";
 // Import Router
 import { AuthRouter, UsersRouter, CategoryRouter, ProductRouter, AddressRouter, LabelAddressRouter, WishlistRouter } from "./src/routes/index.js";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 const app = express();
@@ -29,7 +31,11 @@ app.use((req, res, next) => {
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(express.static("src/public"))
+// app.use(express.static("src/public"))
+// Dapatkan __dirname dengan import.meta.url
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use("/images", express.static(path.join(__dirname, "src/public/images")));
 // Router
 app.use(UsersRouter);
 app.use(AuthRouter);
