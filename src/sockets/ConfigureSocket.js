@@ -1,6 +1,6 @@
 // socketConfig.js
 import { Server } from "socket.io";
-// import Carts from "../models/CartModel.js";
+import Carts from "../models/CartModel.js";
 import Wishlist from "../models/WishlistModel.js";
 
 export const io = new Server({
@@ -27,18 +27,17 @@ export const handleSendMessage = (event, message) => {
     io.emit(event, message)
 }
 
-// export const sendCartDataToClient = async (uuidUsers) => {
-//     const cart = await Carts.findAll({
-//         where: {
-//             uuidUser: uuidUsers
-//         }
-//     })
+export const sendCartDataToClient = async (uuidUsers) => {
+    const cart = await Carts.findAll({
+        where: {
+            uuidUser: uuidUsers
+        }
+    })
 
-//     io.emit(`${uuidUsers}-socket-cart`, cart);
-// }
+    io.emit(`${uuidUsers}-socket-cart`, cart);
+}
 
 export const sendWishlistDataToClient = async (uuidUsers) => {
-    console.log(uuidUsers)
     const wishlists = await Wishlist.findAll({
         where: {
             uuidUser: uuidUsers

@@ -207,7 +207,7 @@ Content-Type: application/json
 
 ###
 // Get Cart By Uuid user
-GET http://localhost:5000/cart/cfe2bdda-498f-4e0a-8e6c-ca5422bfcd69
+GET http://localhost:5000/cart/6e2db6fc-293b-4d25-9f31-729f59f678c4
 Content-Type: application/json
 
 ###

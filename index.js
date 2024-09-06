@@ -5,7 +5,7 @@ import http from "http";
 import { io } from "./src/sockets/ConfigureSocket.js";
 import database from "./src/database/index.js";
 // Import Router
-import { AuthRouter, UsersRouter, CategoryRouter, ProductRouter, AddressRouter, LabelAddressRouter, WishlistRouter } from "./src/routes/index.js";
+import { AuthRouter, UsersRouter, CategoryRouter, ProductRouter, AddressRouter, LabelAddressRouter, WishlistRouter, CartRouter } from "./src/routes/index.js";
 import { fileURLToPath } from "url";
 
 dotenv.config();
@@ -22,10 +22,10 @@ try {
 }
 
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', "https://busar.vercel.app");
-    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader("Access-Control-Allow-Origin", `${process.env.FRONT_END_URL}`);
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
     next();
 })
 
@@ -44,6 +44,7 @@ app.use(ProductRouter);
 app.use(AddressRouter);
 app.use(LabelAddressRouter);
 app.use(WishlistRouter);
+app.use(CartRouter);
 
 const PORT = process.env.PORT || 5000
 server.listen(PORT, () => {
