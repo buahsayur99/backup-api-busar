@@ -5,7 +5,7 @@ import Wishlist from "../models/WishlistModel.js";
 
 export const io = new Server({
     cors: {
-        origin: [`${process.env.FRONT_END_URL}`],
+        origin: ["http://localhost:3000", `${process.env.FRONT_END_URL}`],
         methods: ["GET", "POST"],
         credentials: true
     },
