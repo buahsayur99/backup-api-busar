@@ -22,7 +22,13 @@ try {
 }
 
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", ["http://localhost:3000", `${process.env.FRONT_END_URL}`]);
+    // res.setHeader("Access-Control-Allow-Origin", ["http://localhost:3000", `${process.env.FRONT_END_URL}`]);
+    const allowedOrigins = ["http://localhost:3000", process.env.FRONT_END_URL];
+    const origin = req.headers.origin;
+
+    if (allowedOrigins.includes(origin)) {
+        res.setHeader("Access-Control-Allow-Origin", origin);
+    }
     res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     res.setHeader("Access-Control-Allow-Credentials", "true");
