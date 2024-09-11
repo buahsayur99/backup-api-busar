@@ -5,7 +5,7 @@ import Wishlist from "../models/WishlistModel.js";
 
 export const io = new Server({
     cors: {
-        origin: ["http://localhost:3000", "https://busar.vercel.app"],
+        origin: "http://localhost:3000",
         methods: ["GET", "POST"],
         credentials: true
     },
