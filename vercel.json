@@ -1,15 +1,53 @@
+// {
+//     "version": 2,
+//     "builds": [
+//       {
+//         "src": "./index.js",
+//         "use": "@vercel/node"
+//       }
+//     ],
+//     "routes": [
+//       {
+//         "src": "/(.*)",
+//         "dest": "/"
+//       }
+//     ]
+// }
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "./index.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/"
-      }
-    ]
+  "version": 2,
+  "builds": [
+    {
+      "src": "./index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/socket.io/:path*",
+      "dest": "/api/socket.io/:path*"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/socket.io/:path*",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://busar.vercel.app"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
+        }
+      ]
+    }
+  ]
 }
