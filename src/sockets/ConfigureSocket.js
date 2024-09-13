@@ -2,6 +2,7 @@
 import { Server } from "socket.io";
 import Carts from "../models/CartModel.js";
 import Wishlist from "../models/WishlistModel.js";
+import Pusher from "pusher";
 
 export const io = new Server({
     cors: {
@@ -38,6 +39,31 @@ export const sendCartDataToClient = async (uuidUsers) => {
     io.emit(`${uuidUsers}-socket-cart`, cart);
 }
 
+// export const sendWishlistDataToClient = async (uuidUsers) => {
+//     const wishlists = await Wishlist.findAll({
+//         where: {
+//             uuidUser: uuidUsers
+//         }
+//     });
+//     console.log(wishlists)
+
+//     // io.emit(`${uuidUsers}-socket-wishlists`, wishlists);
+// }
+
+
+
+
+const pusher = new Pusher({
+    appId: "1863778",
+    key: "219991e5be6e2d274d39",
+    secret: "711b95e10105e50e8f14",
+    cluster: "ap1", // Contoh: 'ap1'
+    useTLS: true,
+});
+
+// Mengirim pesan ke channel 'my-channel' dengan event 'my-event'
+
+
 export const sendWishlistDataToClient = async (uuidUsers) => {
     const wishlists = await Wishlist.findAll({
         where: {
@@ -46,5 +72,7 @@ export const sendWishlistDataToClient = async (uuidUsers) => {
     });
     console.log(wishlists)
 
-    io.emit(`${uuidUsers}-socket-wishlists`, wishlists);
+    pusher.trigger("my-channel", "my-event", {
+        message: wishlists
+    });
 }
