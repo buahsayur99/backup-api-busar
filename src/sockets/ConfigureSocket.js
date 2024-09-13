@@ -44,6 +44,7 @@ export const sendWishlistDataToClient = async (uuidUsers) => {
             uuidUser: uuidUsers
         }
     });
+    console.log(wishlists)
 
     io.emit(`${uuidUsers}-socket-wishlists`, wishlists);
 }
