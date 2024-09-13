@@ -70,7 +70,7 @@ export const sendWishlistDataToClient = async (uuidUsers) => {
             uuidUser: uuidUsers
         }
     });
-    console.log(wishlists)
+    console.log({ pusher: wishlists })
 
     pusher.trigger("my-channel", "my-event", {
         message: wishlists
