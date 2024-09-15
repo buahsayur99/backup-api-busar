@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import dotenv from "dotenv";
 import http from "http";
+import cors from "cors";
 import { io } from "./src/sockets/ConfigureSocket.js";
 import database from "./src/database/index.js";
 // Import Router
@@ -26,24 +27,32 @@ try {
     console.error(error);
 }
 
-app.use((req, res, next) => {
-    // res.setHeader("Access-Control-Allow-Origin", ["http://localhost:3000", `${process.env.FRONT_END_URL}`]);
-    const allowedOrigins = ["http://localhost:3000", process.env.FRONT_END_URL];
-    const origin = req.headers.origin;
+// app.use((req, res, next) => {
+//     // res.setHeader("Access-Control-Allow-Origin", ["http://localhost:3000", `${process.env.FRONT_END_URL}`]);
+//     const allowedOrigins = ["http://localhost:3000", process.env.FRONT_END_URL];
+//     const origin = req.headers.origin;
 
-    if (allowedOrigins.includes(origin)) {
-        res.setHeader("Access-Control-Allow-Origin", origin);
-    }
-    res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    res.setHeader("Access-Control-Allow-Credentials", "true");
+//     if (allowedOrigins.includes(origin)) {
+//         res.setHeader("Access-Control-Allow-Origin", origin);
+//     }
+//     res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
+//     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//     res.setHeader("Access-Control-Allow-Credentials", "true");
 
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end(); // Preflight request completed, no further action required
-    }
+//     if (req.method === 'OPTIONS') {
+//         return res.status(200).end(); // Preflight request completed, no further action required
+//     }
 
-    next();
-})
+//     next();
+// })
+
+// Use cors middleware
+app.use(cors({
+    origin: ["http://localhost:3000", process.env.FRONT_END_URL],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
+}));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
