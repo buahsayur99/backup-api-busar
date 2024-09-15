@@ -13,6 +13,11 @@ const app = express();
 const server = http.createServer(app);
 io.attach(server); // Attach Socket.IO to the HTTP server
 
+// Log middleware, ini yang ditambahkan untuk melihat request yang masuk
+app.use((req, res, next) => {
+    console.log(`${req.method} request to ${req.url}`);
+    next();
+});
 
 try {
     await database.sync()
@@ -32,6 +37,11 @@ app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     res.setHeader("Access-Control-Allow-Credentials", "true");
+
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end(); // Preflight request completed, no further action required
+    }
+
     next();
 })
 

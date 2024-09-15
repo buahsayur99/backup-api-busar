@@ -61,9 +61,6 @@ const pusher = new Pusher({
     useTLS: true,
 });
 
-// Mengirim pesan ke channel 'my-channel' dengan event 'my-event'
-
-
 export const sendWishlistDataToClient = async (uuidUsers) => {
     const wishlists = await Wishlist.findAll({
         where: {
