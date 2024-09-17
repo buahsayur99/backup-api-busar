@@ -51,6 +51,7 @@ app.use(cors({
     origin: ["http://localhost:3000", process.env.FRONT_END_URL],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    maxAge: 86400,
     credentials: true
 }));
 
