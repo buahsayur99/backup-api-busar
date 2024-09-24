@@ -69,7 +69,14 @@ export const sendWishlistDataToClient = async (uuidUsers) => {
     });
     console.log({ pusher: wishlists })
 
+    // Kirim event ke Pusher dan tambahkan logging dengan then/catch
     pusher.trigger("my-channel", "my-event", {
         message: wishlists
-    });
+    })
+        .then(() => {
+            console.log('Event sent to Pusher successfully'); // Log sukses
+        })
+        .catch(error => {
+            console.error('Error sending event to Pusher:', error); // Log error
+        });
 }
