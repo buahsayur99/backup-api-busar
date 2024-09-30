@@ -69,7 +69,7 @@ export const addWishlist = async (req, res) => {
         //     }
         // });
         // console.log({ pusher: wishlists })
-
+        console.log('Triggering Pusher event...');
         // Kirim event ke Pusher dan tambahkan logging dengan then/catch
         pusher.trigger(
             "my-channel",
