@@ -63,12 +63,12 @@ export const addWishlist = async (req, res) => {
             useTLS: true,
         });
 
-        const wishlists = await Wishlist.findAll({
-            where: {
-                uuidUser: uuidUsers
-            }
-        });
-        console.log({ pusher: wishlists })
+        // const wishlists = await Wishlist.findAll({
+        //     where: {
+        //         uuidUser: uuidUsers
+        //     }
+        // });
+        // console.log({ pusher: wishlists })
 
         // Kirim event ke Pusher dan tambahkan logging dengan then/catch
         pusher.trigger(
