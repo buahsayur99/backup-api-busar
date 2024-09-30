@@ -73,7 +73,8 @@ export const sendWishlistDataToClient = async (uuidUsers) => {
     pusher.trigger(
         "my-channel",
         "my-event",
-        wishlists
+        { message: "Test event from Vercel" }
+        // wishlists
     )
         .then(() => {
             console.log('Event sent to Pusher successfully'); // Log sukses
