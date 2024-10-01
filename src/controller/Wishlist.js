@@ -2,7 +2,6 @@ import Wishlist from "../models/WishlistModel.js";
 import Users from "../models/UserModel.js";
 import Products from "../models/ProductModel.js";
 import { sendWishlistDataToClient } from "../sockets/ConfigureSocket.js";
-import Pusher from "pusher";
 
 export const getWishlist = async (req, res) => {
     const wishlists = await Wishlist.findAll({
@@ -53,37 +52,7 @@ export const addWishlist = async (req, res) => {
             information: products.information,
         });
 
-        // await sendWishlistDataToClient(req.body.uuidUser);
-
-        const pusher = new Pusher({
-            appId: "1863778",
-            key: "219991e5be6e2d274d39",
-            secret: "711b95e10105e50e8f14",
-            cluster: "ap1", // Contoh: 'ap1'
-            useTLS: true,
-        });
-
-        // const wishlists = await Wishlist.findAll({
-        //     where: {
-        //         uuidUser: uuidUsers
-        //     }
-        // });
-        // console.log({ pusher: wishlists })
-        console.log('Triggering Pusher event...');
-        // Kirim event ke Pusher dan tambahkan logging dengan then/catch
-        pusher.trigger(
-            "my-channel",
-            "my-event",
-            { message: "Test event from Vercel" }
-            // wishlists
-        )
-            .then(() => {
-                console.log('Event sent to Pusher successfully'); // Log sukses
-            })
-            .catch(error => {
-                console.error('Error sending event to Pusher:', error); // Log error
-            });
-
+        await sendWishlistDataToClient(req.body.uuidUser);
         return res.status(200).json({ message: "success add wishlist" });
     } catch (error) {
         return res.status(400).json({ message: error.message });
