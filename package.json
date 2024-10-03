@@ -1,6 +1,9 @@
 {
   "name": "backend",
+  "version": "1.0.0",
   "type": "module",
+  "description": "A simple Node app built on fastify, instantly up and running. Built to be remixed on Glitch.com.",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
@@ -20,5 +23,8 @@
     "sequelize": "^6.37.3",
     "sharp": "^0.33.5",
     "socket.io": "^4.7.5"
-  }
+  },
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
 }
